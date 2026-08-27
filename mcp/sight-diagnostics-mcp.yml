@@ -1,0 +1,101 @@
+generated: '2026-08-27'
+method: probed
+source: https://www.sightdx.com/_api/mcp
+name: Sight Diagnostics Site MCP (Wix "Site Visitor Assistant")
+status: live
+
+authorship: platform
+authorship_note: >-
+  CRITICAL READ-THIS-FIRST CAVEAT. This server is NOT authored by Sight Diagnostics. It is the
+  generic Wix "Site Visitor Assistant" that the Wix platform auto-provisions at /_api/mcp for every
+  tenant site, and it is advertised by the equally auto-generated /llms.txt. The tool set is
+  byte-identical to every other Wix tenant: it exposes Wix's own REST documentation and a generic
+  site-content search, and it carries no Sight Diagnostics domain semantics whatsoever — no OLO
+  device, no CBC result, no hematology parameter, no order, no patient, no LIS/EMR concept appears
+  anywhere in the manifest. Read this as "Sight Diagnostics runs its marketing site on Wix", not as
+  "Sight Diagnostics ships an MCP server". Sight Diagnostics publishes no product API of any kind.
+
+deployment:
+  mode: remote
+  endpoint: https://www.sightdx.com/_api/mcp
+  install: null
+  package: null
+  auth: none
+  verified: probed
+
+transport: streamable-http
+protocol_version: '2025-06-18'
+server_info:
+  name: 'Site Visitor Assistant for site "Sight" (https://www.sightdx.com/_api/mcp)'
+  version: 1.0.0
+capabilities:
+  tools:
+    listChanged: true
+  logging: {}
+
+x-evidence:
+- fetched: '2026-08-27'
+  url: https://www.sightdx.com/_api/mcp
+  method: POST initialize
+  http_status: 200
+  result: server responded with protocolVersion 2025-06-18 and serverInfo
+- fetched: '2026-08-27'
+  url: https://www.sightdx.com/_api/mcp
+  method: POST tools/list
+  http_status: 200
+  result: 9 tools enumerated anonymously, saved verbatim to mcp/sight-diagnostics-mcp-tools.json
+- fetched: '2026-08-27'
+  url: https://www.sightdx.com/_api/mcp
+  method: GET
+  http_status: 401
+  result: endpoint is POST-only; a plain GET is unauthorized (expected for streamable-http MCP)
+- fetched: '2026-08-27'
+  url: https://www.sightdx.com/llms.txt
+  method: GET
+  http_status: 200
+  result: provider-served llms.txt advertises this endpoint under "AI Agent Access"
+
+tool_count: 9
+tools:
+- name: GetBusinessDetails
+  category: site-metadata
+  description: Retrieves business and site details such as timezone, email, phone, and address.
+- name: SearchInSite
+  category: site-content
+  description: Searches the site for information.
+- name: SearchSiteApiDocs
+  category: wix-docs
+  description: Retrieves API documentation for the Wix business solutions installed on this site.
+- name: GenerateVisitorToken
+  category: auth
+  description: Creates a visitor session and returns a visitor access token; required before CallWixSiteAPI.
+- name: CallWixSiteAPI
+  category: wix-platform
+  description: Calls Wix REST API methods on the site on a visitor's behalf.
+- name: ExecuteWixAPI
+  category: wix-platform
+  description: Runs JavaScript against the Wix REST API on the site.
+- name: BrowseWixRESTDocsMenu
+  category: wix-docs
+  description: Browses the Wix REST API documentation menu hierarchy.
+- name: ReadFullDocsArticle
+  category: wix-docs
+  description: Fetches a complete article from the Wix developer documentation portal.
+- name: ReadFullDocsMethodSchema
+  category: wix-docs
+  description: Fetches the full schema for a Wix API method.
+
+domain_coverage:
+  sight_diagnostics_specific_tools: 0
+  wix_platform_tools: 9
+  note: >-
+    Zero of the nine tools expose any Sight Diagnostics capability. The only tenant-specific values
+    in the manifest are the site name ("Sight") and the endpoint URL interpolated into each
+    description string.
+
+crosswalk: null
+crosswalk_note: >-
+  No tool crosswalk is emitted. A ToolCrosswalk binds MCP tools to backing OpenAPI operationIds;
+  Sight Diagnostics publishes no OpenAPI, no GraphQL endpoint and no REST reference, and none of
+  the nine Wix platform tools has a Sight Diagnostics REST operation behind it. There is nothing
+  to cross-walk.

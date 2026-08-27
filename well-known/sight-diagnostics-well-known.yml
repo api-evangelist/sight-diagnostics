@@ -1,0 +1,39 @@
+generated: '2026-08-27'
+method: probed
+source: https://www.sightdx.com/.well-known/
+note: >-
+  Every canonical /.well-known/ path was probed on the single host Sight Diagnostics operates
+  (www.sightdx.com). All seven returned HTTP 400 with a text/html body — the Wix platform's
+  catch-all response for an unrouted path, not a served document. Nothing was saved and NO
+  WellKnown or SecurityTxt pointer is wired in apis.yml: this file records a verified absence,
+  not a presence. There are no other hosts to probe — no api./developer./docs. subdomain of
+  sightdx.com resolves, and apis.yml declares no APIs and therefore no baseURL or servers[] host.
+hosts:
+- host: www.sightdx.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 400
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    file: null
+  - path: /.well-known/api-catalog
+    status: 400
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 400
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 400
+    file: null
+  - path: /.well-known/agent.json
+    status: 400
+    file: null
+summary:
+  hosts_probed: 1
+  paths_probed: 7
+  documents_found: 0
+  agent_card_found: false
