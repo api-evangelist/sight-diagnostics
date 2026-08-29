@@ -13,6 +13,17 @@ description: >-
   platform: it publishes no public API, no developer portal, no SDKs and no machine-readable contract.
   Device connectivity to LIS/EMR systems is delivered as a customer integration engagement rather than
   as a documented public interface, so there is no developer surface to profile.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 image: https://static.wixstatic.com/media/a6dc54_dcc7d9f74ab6416186ef600457ae343b~mv2.jpg/v1/fill/w_1400,h_550,al_c/a6dc54_dcc7d9f74ab6416186ef600457ae343b~mv2.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sight-diagnostics/refs/heads/main/apis.yml
 x-type: company
