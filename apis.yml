@@ -24,6 +24,18 @@ deliveryModel:
   - none
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://static.wixstatic.com/media/a6dc54_dcc7d9f74ab6416186ef600457ae343b~mv2.jpg/v1/fill/w_1400,h_550,al_c/a6dc54_dcc7d9f74ab6416186ef600457ae343b~mv2.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sight-diagnostics/refs/heads/main/apis.yml
 x-type: company
