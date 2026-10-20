@@ -3,18 +3,15 @@ method: probed
 source: https://www.sightdx.com/_api/mcp
 name: Sight Diagnostics Site MCP (Wix "Site Visitor Assistant")
 status: live
-
 authorship: platform
-authorship_note: >-
-  CRITICAL READ-THIS-FIRST CAVEAT. This server is NOT authored by Sight Diagnostics. It is the
-  generic Wix "Site Visitor Assistant" that the Wix platform auto-provisions at /_api/mcp for every
-  tenant site, and it is advertised by the equally auto-generated /llms.txt. The tool set is
-  byte-identical to every other Wix tenant: it exposes Wix's own REST documentation and a generic
-  site-content search, and it carries no Sight Diagnostics domain semantics whatsoever — no OLO
-  device, no CBC result, no hematology parameter, no order, no patient, no LIS/EMR concept appears
-  anywhere in the manifest. Read this as "Sight Diagnostics runs its marketing site on Wix", not as
-  "Sight Diagnostics ships an MCP server". Sight Diagnostics publishes no product API of any kind.
-
+authorship_note: 'CRITICAL READ-THIS-FIRST CAVEAT. This server is NOT authored by Sight Diagnostics. It
+  is the generic Wix "Site Visitor Assistant" that the Wix platform auto-provisions at /_api/mcp for every
+  tenant site, and it is advertised by the equally auto-generated /llms.txt. The tool set is byte-identical
+  to every other Wix tenant: it exposes Wix''s own REST documentation and a generic site-content search,
+  and it carries no Sight Diagnostics domain semantics whatsoever — no OLO device, no CBC result, no hematology
+  parameter, no order, no patient, no LIS/EMR concept appears anywhere in the manifest. Read this as "Sight
+  Diagnostics runs its marketing site on Wix", not as "Sight Diagnostics ships an MCP server". Sight Diagnostics
+  publishes no product API of any kind.'
 deployment:
   mode: remote
   endpoint: https://www.sightdx.com/_api/mcp
@@ -22,17 +19,15 @@ deployment:
   package: null
   auth: none
   verified: probed
-
 transport: streamable-http
 protocol_version: '2025-06-18'
 server_info:
-  name: 'Site Visitor Assistant for site "Sight" (https://www.sightdx.com/_api/mcp)'
+  name: Site Visitor Assistant for site "Sight" (https://www.sightdx.com/_api/mcp)
   version: 1.0.0
 capabilities:
   tools:
     listChanged: true
   logging: {}
-
 x-evidence:
 - fetched: '2026-08-27'
   url: https://www.sightdx.com/_api/mcp
@@ -54,7 +49,6 @@ x-evidence:
   method: GET
   http_status: 200
   result: provider-served llms.txt advertises this endpoint under "AI Agent Access"
-
 tool_count: 9
 tools:
 - name: GetBusinessDetails
@@ -84,18 +78,49 @@ tools:
 - name: ReadFullDocsMethodSchema
   category: wix-docs
   description: Fetches the full schema for a Wix API method.
-
 domain_coverage:
   sight_diagnostics_specific_tools: 0
   wix_platform_tools: 9
-  note: >-
-    Zero of the nine tools expose any Sight Diagnostics capability. The only tenant-specific values
-    in the manifest are the site name ("Sight") and the endpoint URL interpolated into each
-    description string.
-
+  note: Zero of the nine tools expose any Sight Diagnostics capability. The only tenant-specific values
+    in the manifest are the site name ("Sight") and the endpoint URL interpolated into each description
+    string.
 crosswalk: null
-crosswalk_note: >-
-  No tool crosswalk is emitted. A ToolCrosswalk binds MCP tools to backing OpenAPI operationIds;
-  Sight Diagnostics publishes no OpenAPI, no GraphQL endpoint and no REST reference, and none of
-  the nine Wix platform tools has a Sight Diagnostics REST operation behind it. There is nothing
-  to cross-walk.
+crosswalk_note: No tool crosswalk is emitted. A ToolCrosswalk binds MCP tools to backing OpenAPI operationIds;
+  Sight Diagnostics publishes no OpenAPI, no GraphQL endpoint and no REST reference, and none of the nine
+  Wix platform tools has a Sight Diagnostics REST operation behind it. There is nothing to cross-walk.
+tool_quality:
+  tool_count: 10
+  tokens_total: 10611
+  tokens_per_tool_median: 986
+  heavy_tools:
+  - name: ExecuteWixAPI
+    tokens: 2344
+  - name: BrowseWixRESTDocsMenu
+    tokens: 1897
+  - name: ReadFullDocsMethodSchema
+    tokens: 1735
+  - name: ReadFullDocsArticle
+    tokens: 1630
+  - name: WixREADME
+    tokens: 1526
+  heavy_tool_count: 5
+  params_total: 16
+  params_undescribed: 0
+  params_described_pct: 100.0
+  tools_with_undescribed_params: 0
+  tools_annotated: 5
+  annotated_pct: 50.0
+  state_changing_unhinted:
+  - GenerateVisitorToken
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 0
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/sight-diagnostics-mcp-tools.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.
